@@ -9,6 +9,8 @@ public class player : MonoBehaviour
     bool hit;
     public CinemachineVirtualCamera virtualCamera;
     public float scrollSensitivity = 30f;
+    public AudioSource swingSound;
+    public Collider swordCollider;
 
     void Start(){
         anim = GetComponent<Animator>();
@@ -22,6 +24,11 @@ public class player : MonoBehaviour
             float currentFOV = virtualCamera.m_Lens.FieldOfView;
             float newFOV = currentFOV - scrollInput * scrollSensitivity;
             virtualCamera.m_Lens.FieldOfView = Mathf.Clamp(newFOV, 40f, 80f);
+        }
+        if(Input.GetKeyDown("i")){
+            float currentFOV = virtualCamera.m_Lens.FieldOfView;
+            if(currentFOV>40f){virtualCamera.m_Lens.FieldOfView = 40f;}
+            else{virtualCamera.m_Lens.FieldOfView = 80f;}
         }
 
         if((Input.GetKeyDown("j") || Input.GetMouseButtonDown(0)) && !anim.GetCurrentAnimatorStateInfo(0).IsName("attack2")){
@@ -38,4 +45,11 @@ public class player : MonoBehaviour
         }
     }
 
+    public void enableSwordColider(){
+        swordCollider.enabled = true;
+        swingSound.Play();
+    }
+    public void disableSwordColider(){
+        swordCollider.enabled = false;
+    }
 }
