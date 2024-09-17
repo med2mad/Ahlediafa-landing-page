@@ -1,1 +1,1 @@
-The frontend app for the Ahlediafa project.
+The frontend app for the "Ahlediafa" project.
